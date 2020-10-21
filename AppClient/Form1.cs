@@ -15,6 +15,7 @@ namespace AppClient
 {
     public partial class Form1 : Form
     {
+        IShoeBUS shoeBUS = (IShoeBUS)Activator.GetObject(typeof(IShoeBUS), "tcp://10.4.11.15:6969/xxx");
         public Form1()
         {
             InitializeComponent();
@@ -28,9 +29,8 @@ namespace AppClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            String uri = "tcp://10.4.11.15:6969/xxx";
-            IShoeBUS shoeBUS = (IShoeBUS)Activator.GetObject(typeof(IShoeBUS), uri);
-            List<Shoe> shoes = new ShoeBUS().GetAll();
+           
+            List<Shoe> shoes = shoeBUS.GetAll();
             dgvShoe.DataSource = shoes;
         }
 
@@ -39,7 +39,7 @@ namespace AppClient
             if (dgvShoe.SelectedRows.Count > 0)
             {
                 int code = int.Parse(dgvShoe.SelectedRows[0].Cells["Code"].Value.ToString());
-                Shoe shoe = new ShoeBUS().GetDetails(code);
+                Shoe shoe = shoeBUS.GetDetails(code);
                 if (shoe != null)
                 {
                     txtCode.Text = shoe.Code.ToString();
@@ -54,7 +54,7 @@ namespace AppClient
         private void btnSearch_Click(object sender, EventArgs e)
         {
             String keyword = txtKeyword.Text.Trim();
-            List<Shoe> shoes = new ShoeBUS().SearchByName(keyword);
+            List<Shoe> shoes = shoeBUS.SearchByName(keyword);
             dgvShoe.DataSource = shoes;
         }
 
@@ -71,7 +71,7 @@ namespace AppClient
             bool result = new ShoeBUS().AddItem(newShoe);
             if (result)
             {
-                List<Shoe> shoes = new ShoeBUS().GetAll();
+                List<Shoe> shoes = shoeBUS.GetAll();
                 dgvShoe.DataSource = shoes;
             }
             else
@@ -95,10 +95,10 @@ namespace AppClient
                 Size = size,
                 Price = price,
             };
-            bool result = new ShoeBUS().Update(newShoe);
+            bool result = shoeBUS.Update(newShoe);
             if (result)
             {
-                List<Shoe> shoes = new ShoeBUS().GetAll();
+                List<Shoe> shoes = shoeBUS.GetAll();
                 dgvShoe.DataSource = shoes;
             }
             else
@@ -113,10 +113,10 @@ namespace AppClient
             DialogResult dialogResult = MessageBox.Show("ARE YOU SURE ?", "CONFIRMATION", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                bool result = new ShoeBUS().Delete(code);
+                bool result = shoeBUS.Delete(code);
                 if (result)
                 {
-                    List<Shoe> shoes = new ShoeBUS().GetAll();
+                    List<Shoe> shoes = shoeBUS.GetAll();
                     dgvShoe.DataSource = shoes;
                 }
                 else
