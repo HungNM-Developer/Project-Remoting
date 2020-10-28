@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AppShared;
 
 
-namespace AppServer
+namespace AppService
 {
     public class ShoeBUS : MarshalByRefObject, IShoeBUS
     {

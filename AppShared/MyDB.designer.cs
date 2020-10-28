@@ -73,7 +73,8 @@ namespace AppShared
 			}
 		}
 	}
-	
+
+	[Serializable]
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Shoe")]
 	public partial class Shoe : INotifyPropertyChanging, INotifyPropertyChanged
 	{

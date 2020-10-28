@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using AppShared;
-using AppServer;
+
 
 namespace AppClient
 {
     public partial class Form1 : Form
     {
-        IShoeBUS shoeBUS = (IShoeBUS)Activator.GetObject(typeof(IShoeBUS), "tcp://10.4.11.15:6969/xxx");
+        IShoeBUS shoeBUS = (IShoeBUS)Activator.GetObject(typeof(IShoeBUS), "tcp://192.168.1.13:6969/xxx");
         public Form1()
         {
             InitializeComponent();
@@ -68,7 +68,7 @@ namespace AppClient
                 Size = int.Parse(txtSize.Text.Trim()),
                 Price = int.Parse(txtPrice.Text.Trim()),
             };
-            bool result = new ShoeBUS().AddItem(newShoe);
+            bool result = shoeBUS.AddItem(newShoe);
             if (result)
             {
                 List<Shoe> shoes = shoeBUS.GetAll();

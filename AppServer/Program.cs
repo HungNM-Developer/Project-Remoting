@@ -15,6 +15,7 @@ namespace AppServer
     {
         static void Main(string[] args)
         {
+            RemotingConfiguration.CustomErrorsMode = CustomErrorsModes.Off;
             ChannelServices.RegisterChannel(new TcpChannel(6969), false);
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(ShoeBUS), "xxx", WellKnownObjectMode.SingleCall);
             Console.WriteLine("SERVER is started ....");

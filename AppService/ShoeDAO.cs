@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using AppShared;
 
-namespace AppServer
+namespace AppService
 {
     class ShoeDAO
     {

@@ -14,6 +14,7 @@ namespace AppShared
         Shoe GetDetails(int code);
         bool Update(Shoe newShoe);
         bool AddItem(Shoe newShoe);
+        //SShoe SelectByCode(int code);
 
     }
 }
